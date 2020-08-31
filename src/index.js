@@ -213,6 +213,7 @@ export default class Button extends React.Component {
   };
 
   pressOut = event => {
+    const _event = event.persist()
     if (
       this.props.disabled === true ||
       !this.props.children ||
@@ -220,7 +221,7 @@ export default class Button extends React.Component {
     ) {
       return false;
     }
-    if (event.nativeEvent && event.nativeEvent.contentOffset) {
+    if (_event && _event.nativeEvent && _event.nativeEvent.contentOffset) {
       this.release();
       return;
     }
@@ -431,6 +432,8 @@ export default class Button extends React.Component {
         testID="aws-btn-content-view"
         onPressIn={this.pressIn}
         onPressOut={this.pressOut}
+        delayPressIn={0}
+        delayPressOut={10}
       >
         <Animated.View
           testID="aws-btn-content-2"
